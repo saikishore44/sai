@@ -1,0 +1,15 @@
+node {
+    // some block
+    stage('scm'){
+        git 'https://github.com/spring-guides/gs-maven.git'
+    }
+    stage('package'){
+        sh 'cd complete && mvn package'
+    }
+    stage('archieve the artifact'){
+        archiveArtifacts 'complete/target/*.jar'
+    }
+    stage('junit test reports'){
+        junit 'complete/target/surefire-reports/*.xml'
+    }
+}
